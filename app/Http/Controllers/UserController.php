@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -47,7 +48,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.show', compact('user', 'roles'));
     }
 
     /**
@@ -71,6 +73,13 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
+    }
+    public function changeRole(Request $request, User $user)
+    {
+        // return $user;
+        $user->role_id = $request->role_id;
+        $user->save();
+        return back()->with('success', 'The Role Changed Successfuly!!');
     }
     public function changeStatus(Request $request, User $user)
     {

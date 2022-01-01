@@ -10,7 +10,7 @@
         <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">Time</th>
+        <th scope="col">Role</th>
         <th scope="col">Action</th>
         </tr>
     </thead>
@@ -20,7 +20,7 @@
             <th scope="row">{{$user->id}}</th>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$user->created_at->diffForHumans()}}</td>
+            <td>{{$user->role->name}}</td>
             <td>
                 @if(auth()->user()->id !== $user->id)
                @if($user->active)
@@ -29,6 +29,7 @@
                 <a class="btn btn-success" href="{{route('user.change_status', $user->id)}}">Block</a>
                 @endif
                 @endif
+                <a href="{{route('users.show', $user->id)}}" class="btn btn-secondary">Details</a>
         </tr>
         @endforeach
     </tbody>

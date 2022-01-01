@@ -46,4 +46,8 @@ class User extends Authenticatable
         // return ucfirst($value);
         return $this->status == 1? true: false;
     }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

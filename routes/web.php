@@ -27,4 +27,5 @@ require __DIR__.'/auth.php';
 Route::prefix('dashboard')->group(function () {
     Route::resource('users', UserController::class);
     Route::get('/users/{user}/change-status',[UserController::class, 'changeStatus'])->name('user.change_status');
+    Route::post('/users/{user}/change-role',[UserController::class, 'changeRole'])->name('user.change_role');
 });
