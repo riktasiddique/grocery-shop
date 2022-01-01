@@ -40,17 +40,35 @@
                 <!-- Topbar -->
                 @include('layouts.navber.admin.top-navber')
                 <!-- End of Topbar -->
+                <!-- Successfuly Session -->
+                @if(session()->has('success'))
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="success:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                    {{session()->get('success')}}
+                    </div>
+                </div>
+                    </div>
+                </div>
+                @endif
+                <!-- Error Massage -->
+                @if(session()->has('error'))
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                    {{session()->get('error')}}
+                    </div>
+                </div>
+                    </div>
+                </div>
+                @endif
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    @if(session()->has('success'))
-                    <div class="alert alert-primary" role="alert">
-                        {{session()->get('success')}}
-                    </div>
-                    @else
-                    @endif
                     @yield('content')
-                    </div>
                     <!-- /.container-fluid -->
 
             </div>

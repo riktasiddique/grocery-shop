@@ -74,9 +74,11 @@ class UserController extends Controller
     }
     public function changeStatus(Request $request, User $user)
     {
-        // return $request;
         // return $user;
-        $user->status = $user->is_active? 0: 1;
+        if(auth()->user()->id == $user->id){
+            return back()->with('error', 'You can not kill yourself!');
+        }
+        $user->status = $user->active? 0: 1;
         $user->save();
         return back()->with('success', 'The status changed successfuly!');
     }
