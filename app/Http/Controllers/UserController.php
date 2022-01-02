@@ -77,6 +77,10 @@ class UserController extends Controller
     public function changeRole(Request $request, User $user)
     {
         // return $user;
+        if(auth()->user()->id == $user->id){
+            // return back()->with('error', 'You are not allow to do this');
+            abort('403', 'You are not allow to do this');
+        }
         $user->role_id = $request->role_id;
         $user->save();
         return back()->with('success', 'The Role Changed Successfuly!!');

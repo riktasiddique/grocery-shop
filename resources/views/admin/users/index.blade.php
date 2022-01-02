@@ -24,9 +24,9 @@
             <td>
                 @if(auth()->user()->id !== $user->id)
                @if($user->active)
-                <a class="btn btn-danger" href="{{route('user.change_status', $user->id)}}">Unblock</a>
+                <a class="btn btn-success" href="{{route('user.change_status', $user->id)}}">Unblock</a>
                 @else
-                <a class="btn btn-success" href="{{route('user.change_status', $user->id)}}">Block</a>
+                <a class="btn btn-danger" href="{{route('user.change_status', $user->id)}}">Blocked</a>
                 @endif
                 @endif
                 <a href="{{route('users.show', $user->id)}}" class="btn btn-secondary">Details</a>

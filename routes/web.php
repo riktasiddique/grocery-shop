@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +18,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('admin.dashboard');
-})->middleware(['auth']);
+});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware('auth','check_status', 'admin' )->group(function () {
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth', 'check_status'])->name('dashboard');
+    // UsersController
     Route::resource('users', UserController::class);
-    Route::get('/users/{user}/change-status',[UserController::class, 'changeStatus'])->name('user.change_status');
-    Route::post('/users/{user}/change-role',[UserController::class, 'changeRole'])->name('user.change_role');
+    Route::get('/users/{user}/change-status',[UserController::class, 'changeStatus'])->name('user.change_status')->middleware('admin', 'check_status');
+    Route::post('/users/{user}/change-role',[UserController::class, 'changeRole'])->name('user.change_role')->middleware('admin', 'check_status');
 });
