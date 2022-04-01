@@ -41,13 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function getActiveAttribute($value)
-    {
-        // return ucfirst($value);
-        return $this->status == 1? true: false;
-    }
-    public function role()
-    {
+    public function role(){
         return $this->belongsTo(Role::class);
+    }
+    public function getIsActiveAttribute(){
+       return $this->status == 1? true : false;
     }
 }

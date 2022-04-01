@@ -16,15 +16,15 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'name' =>'Super Admin',
+                'name' => 'Super Admin',
                 'created_at' => now()->toDateTimeString()
             ],
             [
-                'name' =>'Admin',
+                'name' => 'Admin',
                 'created_at' => now()->toDateTimeString()
             ],
             [
-                'name' =>'Customer',
+                'name' => 'Customer',
                 'created_at' => now()->toDateTimeString()
             ]
         ];
